@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BookManager.Models.Book>
+
+@{
+    ViewBag.Title = "ListBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListBook</h2>
+
+<p>
+    <a href="/Book/Create" title="Create">Create</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Images)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Author)
+    </td>
+    <td>
+        <img src="@item.Images" width="95" height="100" title="Image" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        <a href="@Url.Action("Buy","Book", new { id = item.ID })" class="btn btn-primary">Buy</a>
+    </td>
+    <td>
+        <a href="/Book/Edit/@item.ID" title="Edit">Edit</a>
+    </td>
+    <td>
+        <a href="/Book/Details/@item.ID" title="Details">Details</a>
+    </td>
+    <td>
+        <a href="/Book/Delete/@item.ID" title="Delete">Delete</a>
+    </td>
+</tr>
+}
+
+</table>
